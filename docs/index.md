@@ -1,17 +1,17 @@
 # cookiecutter-pythonic-project
 
 ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/pyloong/cookiecutter-pythonic-project/main/main?style=flat-square)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/pyloong/cookiecutter-pythonic-bigdata)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/pyloong/cookiecutter-pythonic-project?style=flat-square)
 ![License](https://img.shields.io/github/license/pyloong/cookiecutter-pythonic-project?style=flat-square)
 ![support python version](https://img.shields.io/badge/python-3.9%20%7C%203.10-blue)
 
-一个使用 [Cookiecutter](https://github.com/cookiecutter/cookiecutter) 工具生成 Python 工程化大数据项目的模板。
+一个使用 [Cookiecutter](https://github.com/cookiecutter/cookiecutter) 工具生成 Python 工程化项目的模板。
 
 - 文档: [https://pyloong.github.io/pythonic-project-guidelines/bigdata/basis/init/](https://pyloong.github.io/pythonic-project-guidelines/bigdata/basis/init/)
-- GitHub: [https://github.com/pyloong/cookiecutter-pythonic-project-bigdata-etl](https://github.com/pyloong/cookiecutter-pythonic-project-bigdata-etl)
+- GitHub: [https://github.com/pyloong/cookiecutter-pythonic-bigdata](https://github.com/pyloong/cookiecutter-pythonic-bigdata)
 
-## 特性https://github.com/pyloong/cookiecutter-pythonic-project-bigdata-etl
-https://img.shields.io/github/v/release/pyloong/cookiecutter-pythonic-bigdata
+## 特性
+
 - 跨平台支持使用
 - 支持自定义配置选项
 - 默认使用 SRC 项目结构

@@ -1,0 +1,24 @@
+{
+    "project_name": "My Project",
+    "project_slug": "{{ cookiecutter.project_name.lower()|trim()|replace(' ', '_')|replace('-', '_')|replace('.', '_') }}",
+    "project_description": "My Awesome Project!",
+    "author_name": "Author",
+    "author_email": "{{ cookiecutter.author_name.lower()|trim()|replace(' ', '-') }}@example.com",
+    "version": "0.1.0",
+    "python_version": [
+        "3.10",
+        "3.9"
+    ],
+    "use_src_layout": "y",
+    "use_poetry": "y",
+    "use_docker": "n",
+    "ci_tools": [
+        "none",
+        "Gitlab",
+        "Github"
+    ],
+    "use_framework": [
+        "none",
+        "pyspark"
+    ]
+}

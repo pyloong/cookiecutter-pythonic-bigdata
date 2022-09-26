@@ -1,0 +1,13 @@
+{% if cookiecutter.use_framework|lower == 'pyspark' %}
+pyspark
+{% endif %}
+dynaconf
+click
+stevedore
+
+# Dev
+tox
+pylint
+isort
+pytest
+pytest-cov
