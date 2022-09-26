@@ -5,29 +5,40 @@
 [![python](https://img.shields.io/badge/python-3.10-blue)](https://www.python.org/)
 [![pyspark](https://img.shields.io/badge/pyspark-3.3.0-brightgreen)](https://spark.apache.org/docs/latest/api/python/)
 
-pyspark etl项目工程化模板, 可参考文档：[Pyspark-etl-doc](https://pyloong.github.io/pythonic-project-guidelines/bigdata/basis/init/)
+pyspark etl项目工程化模板,
+可参考文档：[Pyspark-etl-doc](https://pyloong.github.io/pythonic-project-guidelines/bigdata/basis/init/)
 
 ## 使用方式
 
 ### 1. 开发前准备
+
 - Install python 3.9/3.10
+
     ```angular2html
     https://www.python.org/downloads/
     ```
+
 - Install Java 8
+
     ```angular2html
     https://www.oracle.com/java/technologies/downloads/#java8
     ```
+
 - Install hadoop 3.0+
+
     ```bash
     # https://archive.apache.org/dist/hadoop/common/
     tar -zxvf hadoop-3.1.1.tar.gz
     ```
+
 - Install [poetry](https://python-poetry.org/docs/)
+
     ```bash
     pip install poetry
     ```
+
 - Install [cookiecutter](https://github.com/cookiecutter/cookiecutter)
+
     ```bash
     # 安装或升级 cookiecutter
     pip install -U cookiecutter
@@ -44,11 +55,13 @@ cookiecutter https://github.com/pyloong/cookiecutter-pythonic-bigdata
 ```
 
 ### 3. 初始化环境
+
 ```bash
 pyspark-project-template> poetry install
 ```
 
 ## 项目结构
+
 ```angular2html
 ├─src
 │  │  __init__.py

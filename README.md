@@ -1,8 +1,8 @@
 # cookiecutter-pythonic-project
 
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/pyloong/cookiecutter-pythonic-project/main/main?style=flat-square)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/pyloong/cookiecutter-pythonic-bigdata)
-![License](https://img.shields.io/github/license/pyloong/cookiecutter-pythonic-project?style=flat-square)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/pyloong/cookiecutter-pythonic-project-bigdata-etl/main/main?style=flat-square)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/pyloong/cookiecutter-pythonic-project-bigdata-etl)
+![License](https://img.shields.io/github/license/pyloong/cookiecutter-pythonic-project-bigdata-etl?style=flat-square)
 ![support python version](https://img.shields.io/badge/python-3.9%20%7C%203.10-blue)
 
 一个使用 [Cookiecutter](https://github.com/cookiecutter/cookiecutter) 工具生成 Python 工程化大数据项目的模板。
@@ -10,8 +10,8 @@
 - 文档: [https://pyloong.github.io/pythonic-project-guidelines/bigdata/basis/init/](https://pyloong.github.io/pythonic-project-guidelines/bigdata/basis/init/)
 - GitHub: [https://github.com/pyloong/cookiecutter-pythonic-project-bigdata-etl](https://github.com/pyloong/cookiecutter-pythonic-project-bigdata-etl)
 
-## 特性https://github.com/pyloong/cookiecutter-pythonic-project-bigdata-etl
-https://img.shields.io/github/v/release/pyloong/cookiecutter-pythonic-bigdata
+## 特性
+
 - 跨平台支持使用
 - 支持自定义配置选项
 - 默认使用 SRC 项目结构
@@ -59,6 +59,10 @@ Select ci_tools:
 2 - Gitlab
 3 - Github
 Choose from 1, 2, 3 [1]: 
+Select use_framework:
+1 - none
+2 - pyspark
+Choose from 1, 2 [1]: 2
 ```
 
 上述操作，全部使用了默认逻辑：
@@ -73,6 +77,7 @@ Choose from 1, 2, 3 [1]:
 - 默认的项目结构： SRC 结构
 - 默认不使用 Docker 环境
 - 默认不使用 CI 环境
+- 默认不使用 pyspark等依赖
 
 执行结束后，会在操作命令当前位置生成一个 `my_project` 目录，目录内容如下：
 
