@@ -1,24 +1,16 @@
 """Test"""
-import pytest
 
 
-@pytest.fixture
-def custom_template(tmpdir):
-    template = tmpdir.ensure("cookiecutter-template", dir=True)
-    template.join("cookiecutter.json").write('{"repo_name": "example-project"}')
-
-    repo_dir = template.ensure("{{cookiecutter.repo_name}}", dir=True)
-    repo_dir.join("README.rst").write("{{cookiecutter.repo_name}}")
-
-    return template
-
-
-def test_bake_custom_project(cookies, custom_template):
-    """Test for 'cookiecutter-template'."""
-    result = cookies.bake(template=str(custom_template))
+def test_bake_project(cookies):
+    """Generate a new project"""
+    result = cookies.bake(extra_context={"repo_name": "helloworld"})
 
     assert result.exit_code == 0
     assert result.exception is None
 
-    assert result.project_path.name == "example-project"
+    assert result.project_path.name == "helloworld"
     assert result.project_path.is_dir()
+
+    # The `project` attribute is deprecated
+    assert result.project.basename == "helloworld"
+    assert result.project.isdir()
