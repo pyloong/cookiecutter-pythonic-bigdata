@@ -34,15 +34,12 @@ def setup_poetry(flag: str):
     """
     if flag != 'y':
         remove_file(Path('pyproject.toml'))
-        shutil.rmtree(Path('src/{{ cookiecutter.project_slug }}/configs'))
-        remove_file(Path('src/{{ cookiecutter.project_slug }}/dependencies/config.py'))
     else:
         remove_file(
             Path('requirements.txt'),
             Path('setup.cfg'),
             Path('MANIFEST.in')
         )
-        shutil.rmtree(Path('src/{{ cookiecutter.project_slug }}/config'))
 
 
 def setup_docker(flag: str):

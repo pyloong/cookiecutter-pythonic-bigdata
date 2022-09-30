@@ -30,11 +30,12 @@ class Context:
         """Context logger"""
         return LoggerManager(self.settings).get_logger()
 
-
 {%- if cookiecutter.use_framework | lower == 'pyspark' %}
+{%  with %}{% set project_slug_upper = cookiecutter.project_slug|upper() %}
     def get_spark_session(self):
         """Get spark session"""
-        return init_spark(self.settings, app_name='etl_template')
+        return init_spark(self.settings, app_name='{{ project_slug_upper }}')
+{% endwith %}
 
     def get_spark_logger(self) -> SparkLog4j:
         """Get the initialized Spark log object"""

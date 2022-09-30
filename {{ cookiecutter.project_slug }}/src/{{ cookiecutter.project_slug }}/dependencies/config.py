@@ -1,9 +1,12 @@
 """Config Manager"""
 from dynaconf import Dynaconf
 
-_settings_files = [
+__settings_files = [
     # All configs file will merge.  # Load default configs.
-    'configs/global.toml', 'configs/tests.toml', 'configs/prod.toml', 'configs/dev.toml'
+    'src/automotive_data_etl/configs/global.toml',
+    'src/automotive_data_etl/configs/test.toml',
+    'src/automotive_data_etl/configs/prod.toml',
+    'src/automotive_data_etl/configs/dev.toml'
 ]
 
 {%  with %}{% set project_slug_upper = cookiecutter.project_slug|upper() %}

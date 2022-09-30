@@ -5,7 +5,7 @@
 [![python](https://img.shields.io/badge/python-3.10-blue)](https://www.python.org/)
 [![pyspark](https://img.shields.io/badge/pyspark-3.3.0-brightgreen)](https://spark.apache.org/docs/latest/api/python/)
 
-pyspark etl项目工程化模板,
+一个使用 [Cookiecutter](https://github.com/cookiecutter/cookiecutter) 工具生成 Python 工程化ETL开发项目的模板。
 可参考文档：[Pyspark-etl-doc](https://pyloong.github.io/pythonic-project-guidelines/bigdata/basis/init/)
 
 ## 使用方式
@@ -16,19 +16,6 @@ pyspark etl项目工程化模板,
 
     ```angular2html
     https://www.python.org/downloads/
-    ```
-
-- Install Java 8
-
-    ```angular2html
-    https://www.oracle.com/java/technologies/downloads/#java8
-    ```
-
-- Install hadoop 3.0+
-
-    ```bash
-    # https://archive.apache.org/dist/hadoop/common/
-    tar -zxvf hadoop-3.1.1.tar.gz
     ```
 
 - Install [poetry](https://python-poetry.org/docs/)
@@ -51,7 +38,7 @@ pyspark etl项目工程化模板,
 在终端运行命令：
 
 ```bash
-cookiecutter https://github.com/pyloong/cookiecutter-pythonic-bigdata
+cookiecutter https://github.com/pyloong/cookiecutter-pythonic-project-bigdata-etl
 ```
 
 ### 3. 初始化环境
