@@ -8,5 +8,5 @@ LOGLEVEL = 'INFO'
 VERBOSE = false
 
 # tmp task path
-input_path = '../../data/input/car_price.csv'
-output_path = '../../data/output'
+input_path = ''
+output_path = ''

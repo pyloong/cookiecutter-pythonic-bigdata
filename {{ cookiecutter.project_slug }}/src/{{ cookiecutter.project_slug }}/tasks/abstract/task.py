@@ -13,7 +13,7 @@ class AbstractTask(ABC):
 
     def __init__(self):
         self.ctx = Context()
-        self.logger = self.ctx.get_logger()
+        self.logger = self.ctx.logger
         self.settings = self.ctx.settings
 
     def run(self) -> None:

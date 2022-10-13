@@ -60,7 +60,7 @@ def main() -> None:
     Context().environment = args.env
     ctx = Context()
     _update_path(ctx.settings, args.input, args.output)
-    logger = ctx.get_logger()
+    logger = ctx.logger
     logger.info('Etl project init success.')
     logger.info("Env configs options: %s", ctx.settings.message)
     Executor(ctx, args.task).run()

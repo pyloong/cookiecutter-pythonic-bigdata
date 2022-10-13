@@ -19,13 +19,13 @@ class Executor:
     def __init__(self, ctx: Context, task: str):
         self.task = task
         self.ctx = ctx
-        self.logger = ctx.get_logger()
+        self.logger = ctx.logger
 
     def run(self) -> None:
         """calls its `run()` method in the task class"""
         task_class = self._load_task(TASK_NAMESPACE, self.task)
         self.logger.info(f"Running task: {task_class}")
-        task_class(self.ctx).run()
+        task_class().run()
 
     def _load_task(self, namespace: str, name: str) -> Callable:
         """Get extension by name from namespace, return task obj"""
