@@ -1,0 +1,12 @@
+[global]
+message = 'This is in global settings'
+
+# log-config
+LOGPATH = '../../log/'
+DEBUG = false
+LOGLEVEL = 'INFO'
+VERBOSE = false
+
+# tmp task path
+input_path = ''
+output_path = ''

@@ -5,7 +5,7 @@
 ![License](https://img.shields.io/github/license/pyloong/cookiecutter-pythonic-project-bigdata-etl?style=flat-square)
 ![support python version](https://img.shields.io/badge/python-3.9%20%7C%203.10-blue)
 
-一个使用 [Cookiecutter](https://github.com/cookiecutter/cookiecutter) 工具生成 Python 工程化ETL开发项目的模板。
+一个使用 [Cookiecutter](https://github.com/cookiecutter/cookiecutter) 工具生成 Python 工程化大数据项目的模板。
 
 - 文档: [https://pyloong.github.io/pythonic-project-guidelines/bigdata/basis/init/](https://pyloong.github.io/pythonic-project-guidelines/bigdata/basis/init/)
 - GitHub: [https://github.com/pyloong/cookiecutter-pythonic-project-bigdata-etl](https://github.com/pyloong/cookiecutter-pythonic-project-bigdata-etl)
