@@ -1,4 +1,4 @@
-# pyspark-etl-template
+# cookiecutter-pythonic-project-bigdata-etl
 
 ---
 

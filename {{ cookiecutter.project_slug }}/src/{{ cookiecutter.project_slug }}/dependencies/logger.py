@@ -2,6 +2,7 @@
 import os
 import logging
 from logging.config import dictConfig
+from pathlib import Path
 
 from dynaconf.base import Settings
 
@@ -13,6 +14,8 @@ class LoggerManager:
     This is Logger config class, you can init logger config for logging.
     param ctx_settings: Context() settings
     """
+
+    __BASE_DIR = Path(__file__).parent.parent.parent.parent
 
     def __init__(self, ctx_settings: Settings):
         self.settings = ctx_settings
@@ -30,8 +33,13 @@ class LoggerManager:
         Get or Create default log path
         Default log path: "tmp/log/all.log"
         """
+        if not self.settings.LOGPATH or not self.settings.exists('logpath'):
+            log_path = os.path.join(self.__BASE_DIR, 'log')
+            os.makedirs(log_path, exist_ok=True)
+            return log_path
         log_path = self.settings.LOGPATH
-        os.makedirs(log_path, exist_ok=True)
+        if not os.path.exists(log_path):
+            raise FileNotFoundError(f'Can not found directory: "{log_path}" ')
         return log_path
 
     @staticmethod

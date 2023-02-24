@@ -2,7 +2,7 @@
 message = 'This is in global settings'
 
 # log-config
-LOGPATH = '../../log/'
+LOGPATH = '@none'
 DEBUG = false
 LOGLEVEL = 'INFO'
 VERBOSE = false

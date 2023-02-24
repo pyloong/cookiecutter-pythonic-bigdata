@@ -1,14 +1,17 @@
 """Config Manager"""
+from pathlib import Path
+
 from dynaconf import Dynaconf
+
+__BASE_DIR = Path(__file__).parent.parent
 
 __settings_files = [
     # All configs file will merge.  # Load default configs.
-    'src/{{cookiecutter.project_slug}}/configs/global.toml',
-    'src/{{cookiecutter.project_slug}}/configs/test.toml',
-    'src/{{cookiecutter.project_slug}}/configs/prod.toml',
-    'src/{{cookiecutter.project_slug}}/configs/dev.toml'
+    __BASE_DIR / 'configs' / 'dev.toml',
+    __BASE_DIR / 'configs' / 'prod.toml',
+    __BASE_DIR / 'configs' / 'test.toml',
+    __BASE_DIR / 'configs' / 'global.toml',
 ]
-
 {%  with %}{% set project_slug_upper = cookiecutter.project_slug|upper() %}
 config_manager = Dynaconf(
     # Set env `MYPROGRAM='bar'`，use `configs.FOO` .
@@ -17,6 +20,7 @@ config_manager = Dynaconf(
     environments=True,  # multi environments
     load_dotenv=True,  # Enable load .env
     lowercase_read=True,
+    base_dir=__BASE_DIR,
 )
 {% endwith %}
 

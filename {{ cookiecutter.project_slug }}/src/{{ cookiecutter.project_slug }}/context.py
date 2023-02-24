@@ -18,12 +18,25 @@ class Context:
     """
     Context for project, Provide properties and methods
     """
-    environment = ENV_DEVELOPMENT
+    _environment = ENV_DEVELOPMENT
+
+    @property
+    def env(self):
+        return self._environment
+
+    @env.setter
+    def env(self, value):
+        self._environment = value
 
     def __init__(self):
         """Context Parameters"""
-        self.settings = config_manager.from_env(self.environment)
-        self.logger = LoggerManager(self.settings).get_logger()
+        self.logger = None
+        self.settings = None
+
+    def init_context(self):
+        self.settings = config_manager.from_env(self._environment)
+        self.logger: LoggerManager = LoggerManager(self.settings).get_logger()
+
 
 {%- if cookiecutter.use_framework | lower == 'pyspark' %}
 {%  with %}{% set project_slug_upper = cookiecutter.project_slug|upper() %}

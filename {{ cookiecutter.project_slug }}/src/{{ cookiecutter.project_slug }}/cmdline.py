@@ -57,8 +57,9 @@ def main() -> None:
     Parse args, init Context, init logger and executor task run.
     """
     args = _parse_args()
-    Context().environment = args.env
     ctx = Context()
+    ctx.env = args.env
+    ctx.init_context()
     _update_path(ctx.settings, args.input, args.output)
     logger = ctx.logger
     logger.info('Etl project init success.')
