@@ -1,0 +1,10 @@
+# log-config
+VERBOSE: false
+DEBUG: false
+LOGLEVEL: warning
+LOGPATH: /tmp/{{ cookiecutter.project_slug }}
+
+# tmp task path
+input_path: ''
+output_path: ''
+spark_config_path: ''

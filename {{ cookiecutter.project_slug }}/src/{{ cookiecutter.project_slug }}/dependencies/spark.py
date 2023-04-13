@@ -1,24 +1,51 @@
 """Spark Init and Spark Log4j class"""
-from dynaconf.base import Settings
+import json
+
+from pyspark import SparkConf
 from pyspark.sql import SparkSession
 
+from {{cookiecutter.project_slug}}.configs import settings
+from {{cookiecutter.project_slug}}.constants import APP_NAME
 
-def init_spark(settings: Settings, app_name: str):
-    """Create spark session"""
-    spark_builder = (SparkSession.builder
-                     .master(settings.spark_master)
-                     .appName(app_name))
-    # Spark settings load
-    for key, val in settings.spark_config.items():
+
+def init_spark(app_name=APP_NAME, spark_config_path=None, **spark_config):
+    # create a SparkSession builder with the given app name and master URL
+    spark_builder = (
+        SparkSession
+        .builder
+        .appName(app_name))
+
+    # add other config params to the builder
+    for key, val in spark_config.items():
         spark_builder.config(key, val)
-    # Spark session create
-    spark_session = spark_builder.getOrCreate()
-    return spark_session
+
+    # get or create a SparkSession
+    spark_sess = spark_builder.getOrCreate()
+
+    # create a SparkLog4j object to handle logging
+    spark_logger = SparkLog4j(spark_sess)
+
+    # if a config file path is provided, load the config file and set the SparkConf
+    if not spark_config_path:
+        spark_config_path = settings.SPARK_CONFIG_PATH
+    if spark_config_path:
+        with open(spark_config_path, 'r') as config_file:
+            config_dict = json.load(config_file)
+            SparkConf().setAll(config_dict.items())
+        # log a warning message indicating that the config file was loaded
+        spark_logger.warn(f'Loaded config from "{spark_config_path}"')
+    else:
+        # log a warning message indicating that no config file was found
+        spark_logger.warn('Not using spark config files')
+
+    # return the SparkSession and SparkLog4j objects
+    return spark_sess, spark_logger
 
 
 class SparkLog4j:
-    """Wrapper class for Log4j JVM object.
-    Please setting default log level to "WARN".
+    """
+    Wrapper class for Log4j JVM object.
+    Initializes a logger object with a default log level of "WARN".
     :param spark: SparkSession object.
     """
 
@@ -33,22 +60,22 @@ class SparkLog4j:
         self.logger = log4j.LogManager.getLogger(message_prefix)
 
     def error(self, message):
-        """Log an error.
-        :param: Error message to write to log
+        """Log an error message.
+        :param message: Error message to write to log
         :return: None
         """
         self.logger.error(message)
 
     def warn(self, message):
-        """Log a warning.
-        :param: Warning message to write to log
+        """Log a warning message.
+        :param message: Warning message to write to log
         :return: None
         """
         self.logger.warn(message)
 
     def info(self, message):
-        """Log information.
-        :param: Information message to write to log
+        """Log an information message.
+        :param message: Information message to write to log
         :return: None
         """
         self.logger.info(message)
