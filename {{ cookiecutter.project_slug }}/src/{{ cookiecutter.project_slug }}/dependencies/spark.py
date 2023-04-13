@@ -1,6 +1,4 @@
 """Spark Init and Spark Log4j class"""
-import json
-
 from pyspark import SparkConf
 from pyspark.sql import SparkSession
 
@@ -8,7 +6,7 @@ from {{cookiecutter.project_slug}}.configs import settings
 from {{cookiecutter.project_slug}}.constants import APP_NAME
 
 
-def init_spark(app_name=APP_NAME, spark_config_path=None, **spark_config):
+def init_spark(app_name=APP_NAME, **spark_config):
     # create a SparkSession builder with the given app name and master URL
     spark_builder = (
         SparkSession
@@ -26,17 +24,14 @@ def init_spark(app_name=APP_NAME, spark_config_path=None, **spark_config):
     spark_logger = SparkLog4j(spark_sess)
 
     # if a config file path is provided, load the config file and set the SparkConf
-    if not spark_config_path:
-        spark_config_path = settings.SPARK_CONFIG_PATH
-    if spark_config_path:
-        with open(spark_config_path, 'r') as config_file:
-            config_dict = json.load(config_file)
-            SparkConf().setAll(config_dict.items())
+    spark_configs = settings.SPARK_CONFIGS
+    if spark_configs:
+        SparkConf().setAll(spark_configs.items())
         # log a warning message indicating that the config file was loaded
-        spark_logger.warn(f'Loaded config from "{spark_config_path}"')
+        spark_logger.warn(f'Loaded config from "{spark_configs}"')
     else:
         # log a warning message indicating that no config file was found
-        spark_logger.warn('Not using spark config files')
+        spark_logger.warn('Not load spark config')
 
     # return the SparkSession and SparkLog4j objects
     return spark_sess, spark_logger

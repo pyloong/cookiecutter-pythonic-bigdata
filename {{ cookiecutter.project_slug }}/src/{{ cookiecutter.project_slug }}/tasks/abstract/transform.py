@@ -43,6 +43,7 @@ class AbstractTransform(ABC):
         """
         raise NotImplementedError
     { % - if cookiecutter.use_framework | lower == 'pyspark' %}
+
     def extra_extractor(
             self,
             file_format,

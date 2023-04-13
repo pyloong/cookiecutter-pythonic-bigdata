@@ -30,11 +30,7 @@ def _parse_args() -> argparse.Namespace:
         required=False,
         help='Update extract data output path'
     )
-    parser.add_argument(
-        "--config_path",
-        required=False,
-        help='Spark config path, file format is json'
-    )
+
     return parser.parse_args()
 
 
@@ -44,14 +40,12 @@ def _get_task_list():
     return extension_manager.entry_points_names()
 
 
-def _update_path(input_path=None, output_path=None, spark_config_path=None):
+def _update_path(input_path=None, output_path=None):
     """Get task list by namespace"""
     if input_path:
         update_configs('input_path', input_path)
     if output_path:
         update_configs('output_path', output_path)
-    if spark_config_path:
-        update_configs('spark_config_path', spark_config_path)
 
 
 def main() -> None:
@@ -66,7 +60,7 @@ def main() -> None:
     ctx.init_logger()
     logger: Logger = ctx.logger
     # Update Settings Use Args
-    _update_path(input_path=args.input, output_path=args.output, spark_config_path=args.config_path)
+    _update_path(input_path=args.input, output_path=args.output)
     # logger = logging.getLogger()
     logger.info('ETL project init success.')
     # Executor scheduling task
@@ -75,3 +69,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

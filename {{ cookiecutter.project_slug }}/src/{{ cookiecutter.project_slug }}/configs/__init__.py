@@ -13,12 +13,12 @@ _settings_files = [
 
 # User configuration. It will be created automatically by the pip installer .
 _external_files = [
-    Path(sys.prefix, 'etc', 'etl_demo_01', 'settings.yml')
+    Path(sys.prefix, 'etc', '{{cookiecutter.project_slug}}', 'settings.yml')
 ]
 
 settings = Dynaconf(
     # Set env `{{ project_slug_upper }}_FOO='bar'`，use `settings.FOO` .
-    envvar_prefix='ETL_DEMO_01',
+    envvar_prefix='{{cookiecutter.project_slug}}',
     settings_files=_settings_files,  # load user configuration.
     # environments=True,  # Enable multi-level configuration，eg: default, development, production
     load_dotenv=True,  # Enable load .env

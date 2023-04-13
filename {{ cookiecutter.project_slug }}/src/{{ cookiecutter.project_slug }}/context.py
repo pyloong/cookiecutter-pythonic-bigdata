@@ -28,9 +28,9 @@ class Context:
         self.logger = logging.getLogger()
 
 {%- if cookiecutter.use_framework | lower == 'pyspark' %}
-    def get_spark_session(self, app_name=APP_NAME, spark_config_path=None, **spark_config) -> SparkSession:
+    def get_spark_session(self, app_name=APP_NAME, **spark_config) -> SparkSession:
         """Get spark session"""
-        spark_sess, spark_logger = init_spark(app_name=app_name, spark_config_path=spark_config_path, **spark_config)
+        spark_sess, spark_logger = init_spark(app_name=app_name, **spark_config)
         self.spark_logger = spark_logger
         return spark_sess
 
