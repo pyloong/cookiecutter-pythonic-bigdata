@@ -42,4 +42,4 @@ class Context:
         if not spark_session:
             self.get_spark_session()
         return SparkLog4j(spark_session)
-{ % endif %}
+{%- endif %}
