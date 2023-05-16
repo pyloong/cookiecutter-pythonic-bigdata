@@ -16,6 +16,7 @@ _external_files = [
     Path(sys.prefix, 'etc', '{{cookiecutter.project_slug}}', 'settings.yml')
 ]
 
+{%  with %}{% set project_slug_upper = cookiecutter.project_slug|upper() %}
 settings = Dynaconf(
     # Set env `{{ project_slug_upper }}_FOO='bar'`，use `settings.FOO` .
     envvar_prefix='{{cookiecutter.project_slug}}',
@@ -28,6 +29,7 @@ settings = Dynaconf(
     base_dir=_base_dir,  # `settings.BASE_DIR`
 )
 
+{% endwith %}
 
 def update_configs(key, value):
     """Overwrite env settings config value"""

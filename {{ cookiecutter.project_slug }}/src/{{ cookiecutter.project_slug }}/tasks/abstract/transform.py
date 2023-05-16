@@ -5,7 +5,7 @@ from typing import Optional, Union, List
 {%- if cookiecutter.use_framework|lower == 'pyspark' %}
 from pyspark.sql import SparkSession, DataFrame
 
-{%- endif %}
+{% endif %}
 from {{cookiecutter.project_slug}}.context import Context
 
 
@@ -19,17 +19,13 @@ class AbstractTransform(ABC):
     def __init__(self):
         self.ctx = Context()  # create a context object
         self.settings = self.ctx.settings  # create settings object
-        { % - if cookiecutter.use_framework | lower != 'pyspark' %}
+        { %- if cookiecutter.use_framework | lower != 'pyspark' %}
         self.logger = self.ctx.logger
-        { % - endif %}
-        { % - if cookiecutter.use_framework | lower == 'pyspark' %}
+        { %- elif cookiecutter.use_framework | lower == 'pyspark' %}
         self.spark: SparkSession = self.ctx.get_spark_session()  # create spark session
         self.logger = self.ctx.spark_logger
-        self.default_parallelism = int(
-            self.spark.sparkContext.getConf().get('spark.default.parallelism')
-        )  # get spark default parallelism variable
+        { % endif %}
 
-        {%- endif %}
     @abstractmethod
     def transform(self, data):
         """
@@ -42,7 +38,7 @@ class AbstractTransform(ABC):
             The transformed dataset.
         """
         raise NotImplementedError
-    { % - if cookiecutter.use_framework | lower == 'pyspark' %}
+    {%- if cookiecutter.use_framework | lower == 'pyspark' %}
 
     def extra_extractor(
             self,
@@ -115,4 +111,4 @@ class AbstractTransform(ABC):
             partitionBy=partition_by,
             **options
         )
-        {%- endif %}
+        {% endif %}

@@ -1,40 +1,33 @@
 """Spark Init and Spark Log4j class"""
-from pyspark import SparkConf
 from pyspark.sql import SparkSession
 
 from {{cookiecutter.project_slug}}.configs import settings
 from {{cookiecutter.project_slug}}.constants import APP_NAME
 
 
-def init_spark(app_name=APP_NAME, **spark_config):
-    # create a SparkSession builder with the given app name and master URL
-    spark_builder = (
-        SparkSession
-        .builder
-        .appName(app_name))
-
-    # add other config params to the builder
-    for key, val in spark_config.items():
-        spark_builder.config(key, val)
-
-    # get or create a SparkSession
-    spark_sess = spark_builder.getOrCreate()
-
-    # create a SparkLog4j object to handle logging
-    spark_logger = SparkLog4j(spark_sess)
-
-    # if a config file path is provided, load the config file and set the SparkConf
+def init_spark(app_name=APP_NAME):
+    spark_builder = SparkSession.builder.appName(app_name)
+    # Spark settings load
     spark_configs = settings.SPARK_CONFIGS
     if spark_configs:
-        SparkConf().setAll(spark_configs.items())
-        # log a warning message indicating that the config file was loaded
-        spark_logger.warn(f'Loaded config from "{spark_configs}"')
-    else:
-        # log a warning message indicating that no config file was found
-        spark_logger.warn('Not load spark config')
-
-    # return the SparkSession and SparkLog4j objects
+        for key, val in settings.SPARK_CONFIGS.items():
+            spark_builder.config(key, val)
+    spark_sess = spark_builder.getOrCreate()
+    # Spark s3a
+    if settings.USE_S3A:
+        init_s3a_conf(spark_sess)
+    spark_logger = SparkLog4j(spark_sess)
     return spark_sess, spark_logger
+
+def init_s3a_conf(spark):
+    # 设置ceph的信息
+    hadoopConf = spark.sparkContext._jsc.hadoopConfiguration()
+    hadoopConf.set("fs.s3a.endpoint", settings.END_POINT)
+    hadoopConf.set("fs.s3a.access.key", settings.ACCESS_KEY_ID)
+    hadoopConf.set("fs.s3a.secret.key", settings.SECRET_ACCESS_KEY)
+    hadoopConf.set('fs.s3a.impl', 'org.apache.hadoop.fs.s3a.S3AFileSystem')
+    hadoopConf.set('fs.s3a.ssl.enabled', 'false')
+    hadoopConf.set('fs.s3a.path.style.access', 'true')
 
 
 class SparkLog4j:

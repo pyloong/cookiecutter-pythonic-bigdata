@@ -1,8 +1,11 @@
 """Context"""
+import logging
+
 {%- if cookiecutter.use_framework|lower == 'pyspark' %}
 from pyspark.sql import SparkSession
 {%- endif %}
 
+from {{cookiecutter.project_slug}}.constants import APP_NAME
 from {{cookiecutter.project_slug}}.utils.singleton import singleton
 {%- if cookiecutter.use_framework|lower == 'pyspark' %}
 from {{cookiecutter.project_slug}}.dependencies.spark import SparkLog4j
@@ -27,7 +30,7 @@ class Context:
         """
         self.logger = logging.getLogger()
 
-{%- if cookiecutter.use_framework | lower == 'pyspark' %}
+{%- if cookiecutter.use_framework|lower == 'pyspark' %}
     def get_spark_session(self, app_name=APP_NAME, **spark_config) -> SparkSession:
         """Get spark session"""
         spark_sess, spark_logger = init_spark(app_name=app_name, **spark_config)
@@ -39,4 +42,4 @@ class Context:
         if not spark_session:
             self.get_spark_session()
         return SparkLog4j(spark_session)
-{%- endif %}
+{ % endif %}
