@@ -2,6 +2,7 @@
 from abc import ABC, abstractmethod
 
 from {{cookiecutter.project_slug}}.context import Context
+from {{cookiecutter.project_slug}}.configs import settings
 
 
 class AbstractTask(ABC):
@@ -12,27 +13,29 @@ class AbstractTask(ABC):
     # pylint: disable=[too-few-public-methods]
 
     def __init__(self):
-        self.ctx = Context()
-        self.logger = self.ctx.logger
-        self.settings = self.ctx.settings
+        self.ctx = Context()  # create a context object
+        self.settings = settings  # create a settings object
+        # loader path
+        self.input_path = self.settings.INPUT_PATH
+        self.output_path = self.settings.OUTPUT_PATH
 
     def run(self) -> None:
-        """Execute task module"""
-        data = self._extract()
-        data_transformed = self._transform(data)
-        self._load(data_transformed)
+        """Execute the task module"""
+        data = self._extract()  # extract data
+        data_transformed = self._transform(data)  # transform data
+        self._load(data_transformed)  # load data
 
     @abstractmethod
     def _extract(self):
-        """extract data from file/database/other."""
+        """Extract data from a file, database, or other source."""
         raise NotImplementedError
 
     @abstractmethod
     def _transform(self, data):
-        """Transform incoming data, and output the transform result"""
+        """Transform incoming data and output the transformed result."""
         raise NotImplementedError
 
     @abstractmethod
     def _load(self, data) -> None:
-        """Load data to file/database/other."""
+        """Load data to a file, database, or other destination."""
         raise NotImplementedError

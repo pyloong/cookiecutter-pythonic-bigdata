@@ -1,6 +1,7 @@
 """
 Loads a Task class and calls its `run()` method.
 """
+from logging import Logger
 from typing import Callable
 
 from stevedore import ExtensionManager
@@ -19,7 +20,7 @@ class Executor:
     def __init__(self, ctx: Context, task: str):
         self.task = task
         self.ctx = ctx
-        self.logger = ctx.logger
+        self.logger: Logger = ctx.logger
 
     def run(self) -> None:
         """calls its `run()` method in the task class"""
